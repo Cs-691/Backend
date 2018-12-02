@@ -22,7 +22,7 @@ class User(db.Model):
         self.password=password
         
     def __repr__(self):
-        return f"User('{self.firstName}', '{self.email}', '{self.gender}')"
+        return f"User('{self.firstName}', '{self.lastName}', '{self.email}')"
 
 class UserSchema(ma.Schema):
     class Meta:
@@ -30,5 +30,4 @@ class UserSchema(ma.Schema):
         fields = ('firstName', 'lastName','age','gender','email','password')
 
 
-user_schema = UserSchema()
-users_schema = UserSchema(many=True)
+

@@ -1,7 +1,12 @@
 from flask import Flask, request, jsonify
-from illness_backend import app
-from illness_backend.models import User
+from illness_backend import app,db
+from illness_backend.models import User,UserSchema
 
+
+
+
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)
 
 # endpoint to create new user
 @app.route("/api/user/signup/", methods=["POST"])
