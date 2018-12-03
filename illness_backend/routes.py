@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from illness_backend import app,db
 from illness_backend.models import User,UserSchema
-
+from illness_backend.algorithm import Algorithm
 
 
 
@@ -111,13 +111,23 @@ def user_delete(id):
 @app.route("/api/chat/response/<message>", methods=["GET"])
 def chat_response(message):
   #  user = User.query.get(message)
-    print(message)
-    message1="message received to back end: "+ message
-    response = app.response_class(
-        response=message1,
+        c=Algorithm()
+        x=[]
+        x.append('extra_marital_contacts')
+        x.append('shivering')
+        x.append('joint_pain')
+        x.append('visual_disturbances')
+        x.append('irritability')
+        x.append('depression')
+        x.append('stiff_neck')
+        x.append('excessive_hunger')
+        illness=c.predict(x)
+        response = app.response_class(
+        response=illness,
         status=200)
-    return response
+        return response
 
 @app.route('/')
 def hello_world():
+        chat_response("as")
         return 'Hello, World12qw'
