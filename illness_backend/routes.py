@@ -7,6 +7,7 @@ from illness_backend.algorithm import Algorithm
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
+c=Algorithm()
 
 # endpoint to create new user
 @app.route("/api/user/signup/", methods=["POST"])
@@ -107,20 +108,14 @@ def user_delete(id):
 
     return user_schema.jsonify(user)
 
-
-@app.route("/api/chat/response/<message>", methods=["GET"])
-def chat_response(message):
+#@app.route("/api/user/updateUser/", methods=["POST"])
+@app.route("/api/chat/response/", methods=["POST"])
+def chat_response():
   #  user = User.query.get(message)
-        c=Algorithm()
-        x=[]
-        x.append('extra_marital_contacts')
-        x.append('shivering')
-        x.append('joint_pain')
-        x.append('visual_disturbances')
-        x.append('irritability')
-        x.append('depression')
-        x.append('stiff_neck')
-        x.append('excessive_hunger')
+        #print(request)
+        req_data = request.get_json()
+        x=  req_data
+        print(x)
         illness=c.predict(x)
         response = app.response_class(
         response=illness,
@@ -129,5 +124,4 @@ def chat_response(message):
 
 @app.route('/')
 def hello_world():
-        chat_response("as")
         return 'Hello, World12qw'
