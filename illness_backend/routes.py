@@ -7,7 +7,7 @@ from illness_backend.response import Response
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
-c=Algorithm()
+algo=Algorithm()
 remedy=Remedies()
 
 # endpoint to create new user
@@ -117,9 +117,9 @@ def chat_response():
         req_data = request.get_json()
         x=  req_data
         print(x)
-        illness=c.predict(x)[0].lower()
-        remedies=remedy.getRemedies(illness)
-        predictedResponse=Response(illness,remedies)
+        algo.predict(x)
+        remedies=remedy.getRemedies(algo.getIllness())
+        predictedResponse=Response(algo.getIllness(),remedies,algo.getProbability())
         data=predictedResponse.toJSON()
         response = app.response_class(
         response=data,

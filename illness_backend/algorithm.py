@@ -1,9 +1,17 @@
 
+
 class Algorithm():
    
     dt=None
     cols=None
+    illness=""
+    probability=1
    
+    def getIllness(self):
+        return self.illness[0].lower()
+    
+    def getProbability(self):
+        return self.probability
     def __init__(self):
        
 
@@ -316,6 +324,11 @@ class Algorithm():
         # In[43]:
         
         print(self.dt.predict(sample_x))
-        return self.dt.predict(sample_x)
-        #self.dt.predict_proba(sample_x)
+        self.illness=self.dt.predict(sample_x)
+        #return self.dt.predict(sample_x)
+        print(np.amax(self.dt.predict_proba(sample_x)))
+        self.probability= np.amax(self.dt.predict_proba(sample_x))
+        
+        
+        
            
