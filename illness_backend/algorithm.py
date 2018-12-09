@@ -283,7 +283,8 @@ class Algorithm():
         
         x = []
         for symptom in list:
-            x.append(feature_dict[symptom])
+            if(symptom in feature_dict):
+                x.append(feature_dict[symptom])
         print(x)
         
         
