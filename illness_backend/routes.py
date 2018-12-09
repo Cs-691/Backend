@@ -1,13 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,json
 from illness_backend import app,db
 from illness_backend.models import User,UserSchema
 from illness_backend.algorithm import Algorithm
-
-
+from illness_backend.remedies import Remedies
+from illness_backend.response import Response
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 c=Algorithm()
+remedy=Remedies()
 
 # endpoint to create new user
 @app.route("/api/user/signup/", methods=["POST"])
@@ -111,14 +112,18 @@ def user_delete(id):
 #@app.route("/api/user/updateUser/", methods=["POST"])
 @app.route("/api/chat/response/", methods=["POST"])
 def chat_response():
-  #  user = User.query.get(message)
+  #
         #print(request)
         req_data = request.get_json()
         x=  req_data
         print(x)
-        illness=c.predict(x)
+        illness=c.predict(x)[0].lower()
+        remedies=remedy.getRemedies(illness)
+        predictedResponse=Response(illness,remedies)
+        data=predictedResponse.toJSON()
         response = app.response_class(
-        response=illness,
+        response=data,
+        mimetype='application/json',
         status=200)
         return response
 

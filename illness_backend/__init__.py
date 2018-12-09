@@ -13,6 +13,8 @@ app = Flask(__name__, instance_relative_config=True)
 CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost:3306/test2'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']='false'
+app.config['JSONIFY_PRETTYPRINT_REGULAR']='true'
+
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 db.init_app(app)
