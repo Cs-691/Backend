@@ -4,11 +4,16 @@ from illness_backend.models import User,UserSchema
 from illness_backend.algorithm import Algorithm
 from illness_backend.remedies import Remedies
 from illness_backend.response import Response
+from flask_mail  import Message
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 algo=Algorithm()
 remedy=Remedies()
+
+
+
+
 
 # endpoint to create new user
 @app.route("/api/user/signup/", methods=["POST"])
@@ -28,7 +33,7 @@ def add_user():
         db.session.add(new_user)
         db.session.commit()
     
-        return email+str(age);
+        return firstName;
     else:
         response = app.response_class(
         response="User with given email is already exist",
@@ -44,7 +49,7 @@ def get_user():
     User1 = User.query.filter_by(email=emailId).first()
     if(User1.password==password):
         response = app.response_class(
-        response="user found",
+        response=User1.firstName,
         status=200)
     else:
         response = app.response_class(
@@ -118,7 +123,7 @@ def chat_response():
         x=  req_data
         print(x)
         algo.predict(x)
-        remedies=remedy.getRemedies(algo.getIllness())
+        remedies=get_remedies(algo.getIllness())
         predictedResponse=Response(algo.getIllness(),remedies,algo.getProbability())
         data=predictedResponse.toJSON()
         response = app.response_class(
@@ -126,6 +131,14 @@ def chat_response():
         mimetype='application/json',
         status=200)
         return response
+
+# endpoint to get user detail by id
+@app.route("/api/user/getRemedies/<illness>", methods=["GET"])
+def get_remedies(illness):
+    illness=illness.lower()
+    remedies=remedy.getRemedies(illness)
+    return remedies
+
 
 @app.route('/')
 def hello_world():

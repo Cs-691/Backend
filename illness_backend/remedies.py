@@ -4,6 +4,7 @@ class Remedies():
     remedies = None
     
     def getRemedies(self,illness):
+        print(illness)
         
         if illness in self.remedies:
             return self.remedies[illness]
