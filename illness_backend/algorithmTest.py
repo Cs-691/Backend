@@ -9,17 +9,13 @@ from flask import Flask, request, jsonify,json
 ##3 function
 
 from algorithm import Algorithm
-from response import Response
+from remedies import Remedies
 
-c=Algorithm() 
-x=[]
-x.append('extra_marital_contacts')
-x.append('shivering')
-x.append('joint_pain')
-x.append('visual_disturbances')
-x.append('irritability')
-x.append('depression')
-x.append('stiff_neck')
-x.append('excessive_hunger')
-c.predict(x)
+c=Remedies() 
+print(c.getRemedies('allergY'))
+
+
+
+
+
 
