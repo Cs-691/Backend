@@ -20,8 +20,8 @@ class Remedies():
       "for sure ..."
      )
         
-        self.remedies['allergy'] = ("this seems to be allergy"
-      "please consult doctor"
+        self.remedies['allergy'] = ("We could not identify this illness. This seems to be strange allergy\n."
+      "Please consult doctor"
      )
      
         self.remedies["peptic ulcer"] = (
