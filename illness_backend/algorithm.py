@@ -8,7 +8,9 @@ class Algorithm():
     probability=1
    
     def getIllness(self):
-        return self.illness[0].lower()
+        return self.illness.lower()
+    def setIllness(self,verifiedIllness):
+        self.illness=verifiedIllness.lower()
     
     def getProbability(self):
         return self.probability
@@ -323,8 +325,8 @@ class Algorithm():
         
         # In[43]:
         
-        print(self.dt.predict(sample_x))
-        self.illness=self.dt.predict(sample_x)
+        #print(self.dt.predict(sample_x))
+        self.illness=self.dt.predict(sample_x)[0]
         #return self.dt.predict(sample_x)
         print(np.amax(self.dt.predict_proba(sample_x)))
         self.probability= np.amax(self.dt.predict_proba(sample_x))

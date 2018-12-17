@@ -1,21 +1,25 @@
 
 from flask import Flask, request, jsonify,json
 
-# In[36:
-
-
-
-
-##3 function
 
 from algorithm import Algorithm
 from remedies import Remedies
-
-c=Remedies() 
-print(c.getRemedies('allergY'))
+from verification import Verification
 
 
+            
 
+
+
+
+x=[]
+c=Verification()
+x.append('chest_pain')
+x.append('fast_heart_rate')
+x.append('phlegm')
+x.append('skin_rash')
+x.append('continuous_sneezing')
+print(c.predict(x))
 
 
 

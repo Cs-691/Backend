@@ -5,10 +5,13 @@ from illness_backend.algorithm import Algorithm
 from illness_backend.remedies import Remedies
 from illness_backend.response import Response
 from flask_mail  import Message
+from illness_backend.verification import Verification
+
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 algo=Algorithm()
+verify=Verification()
 remedy=Remedies()
 
 
@@ -123,6 +126,8 @@ def chat_response():
         x=  req_data
         print(x)
         algo.predict(x)
+        verifiedIllness=verify.predict(x)
+        algo.setIllness(verifiedIllness)
         remedies=get_remedies(algo.getIllness())
         predictedResponse=Response(algo.getIllness(),remedies,algo.getProbability())
         data=predictedResponse.toJSON()
