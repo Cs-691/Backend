@@ -27,11 +27,14 @@ def add_user():
     gender = request.json['gender']
     email = request.json['email']
     password = request.json['password']
+    diabetes = request.json['diabetes']
+    smoke = request.json['smoke']
+    bloodPressure = request.json['bloodPressure']
     
     
     User1 = User.query.filter_by(email=email).first()
     if(User1 is None):
-        new_user = User(firstName, lastName,age,gender,email,password)
+        new_user = User(firstName, lastName,age,gender,email,password,diabetes,smoke,bloodPressure)
     
         db.session.add(new_user)
         db.session.commit()
@@ -80,6 +83,10 @@ def user_update():
     email = request.json['email']
     password = request.json['password']
     newPassword = request.json['npassword']
+    diabetes = request.json['diabetes']
+    smoke = request.json['smoke']
+    bloodPressure = request.json['bloodPressure']
+    
     
     
     user = User.query.get(email)
@@ -100,10 +107,13 @@ def user_update():
     user.lastName=lastName;
     user.age=age;
     user.gender=gender;
+    user.diabetes=diabetes
+    user.smoke=smoke
+    user.bloodPressure=bloodPressure
 
     db.session.commit()
     response = app.response_class(
-        response="Password Updated",
+        response="User Information Updated",
         status=200)
     return response
 
