@@ -9,7 +9,7 @@ class Response():
     def __init__(self,illness,remedy,probability):
           self.illness=illness
           self.remedy=remedy
-          self.probability=round(np.random.uniform(0.8, 0.99),2)
+          self.probability=round(np.random.uniform(0.8, probability),2)
     
     def __repr__(self):
         return f"Illness('{self.illness}', '{self.probability})"
