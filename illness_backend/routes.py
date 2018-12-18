@@ -146,6 +146,19 @@ def chat_response():
         mimetype='application/json',
         status=200)
         return response
+    
+#@app.route("/api/user/updateUser/", methods=["POST"])
+@app.route("/api/user/sendMessage/", methods=["POST"])
+def store_message():
+  #
+        #print(request)
+        req_data = request.get_json()
+        x=  req_data
+        print(x)
+        f = open("C:\\Users\\Nirav\\Desktop\\waste\\illness_backend\\demofile.txt", "a")
+        f.write("\r\n -------------------\r\n"+x+"\r\n--------------");
+        return "message received!"
+
 
 # endpoint to get user detail by id
 @app.route("/api/user/getRemedies/<illness>", methods=["GET"])
